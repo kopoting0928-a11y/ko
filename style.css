@@ -1,10 +1,17 @@
-/* --- 基礎設定 --- */
+/* 和風・侘寂風個人作品集 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;600&display=swap');
+
 :root {
-    --bg-color: #0b0e14;       /* 深色背景 */
-    --text-color: #e0e0e0;     /* 主要文字 */
-    --accent-color: #00d4ff;   /* 科技藍亮點 */
-    --secondary-color: #1a1f29; /* 次要區塊背景 */
-    --font-main: 'Segoe UI', Roboto, sans-serif;
+    --bg-color: #f5f1e8;
+    --paper-color: #fbf9f4;
+    --text-color: #292923;
+    --muted-color: #777568;
+    --accent-color: #9b3d32;
+    --accent-dark: #713027;
+    --secondary-color: #e9e3d7;
+    --line-color: #d8d0c2;
+    --font-main: 'Noto Sans TC', 'Yu Gothic', 'Hiragino Kaku Gothic ProN', sans-serif;
+    --font-display: 'Noto Serif TC', 'Yu Mincho', serif;
 }
 
 * {
@@ -13,15 +20,17 @@
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth; /* 平滑滾動 */
-}
+html { scroll-behavior: smooth; }
 
 body {
     font-family: var(--font-main);
     background-color: var(--bg-color);
     color: var(--text-color);
-    line-height: 1.6;
+    line-height: 1.9;
+    letter-spacing: .035em;
+    background-image:
+        radial-gradient(rgba(95, 77, 55, .055) .7px, transparent .7px);
+    background-size: 7px 7px;
 }
 
 .container {
@@ -30,16 +39,19 @@ body {
     padding: 0 2rem;
 }
 
-/* --- 導覽列 --- */
+/* 導覽列 */
 .navbar {
-    height: 70px;
+    min-height: 72px;
     display: flex;
     align-items: center;
     position: fixed;
     width: 100%;
     top: 0;
-    background: rgba(11, 14, 20, 0.95);
+    background: rgba(245, 241, 232, .94);
+    border-bottom: 1px solid rgba(125, 110, 88, .22);
+    backdrop-filter: blur(12px);
     z-index: 1000;
+    transition: box-shadow .3s, background .3s;
 }
 
 .navbar .container {
@@ -50,110 +62,169 @@ body {
 }
 
 .logo {
-    font-weight: bold;
-    font-size: 1.2rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.05rem;
     color: var(--accent-color);
     text-decoration: none;
-    letter-spacing: 2px;
+    letter-spacing: .22em;
 }
 
 .nav-links {
     display: flex;
     list-style: none;
-}
-
-.nav-links li {
-    margin-left: 2rem;
+    gap: 2.2rem;
 }
 
 .nav-links a {
     text-decoration: none;
     color: var(--text-color);
-    font-size: 0.9rem;
-    transition: color 0.3s;
+    font-size: .88rem;
+    letter-spacing: .12em;
+    transition: color .3s;
 }
 
-.nav-links a:hover {
-    color: var(--accent-color);
-}
+.nav-links a:hover { color: var(--accent-color); }
 
-/* --- Hero Section --- */
+/* 首屏 */
 .hero {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding: 8rem 0 5rem;
+    background:
+        linear-gradient(90deg, transparent 49.9%, rgba(155, 61, 50, .08) 50%, transparent 50.1%),
+        var(--bg-color);
 }
 
+.hero::before,
+.hero::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+}
+
+.hero::before {
+    width: min(62vw, 650px);
+    aspect-ratio: 1;
+    border: 1px solid rgba(155, 61, 50, .18);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.hero::after {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    top: 24%;
+    right: 22%;
+    box-shadow: -42vw 42vh 0 rgba(155, 61, 50, .55),
+                18vw 34vh 0 rgba(155, 61, 50, .35);
+}
+
+.hero .container { position: relative; z-index: 1; }
+
 .hero-name {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    letter-spacing: .12em;
+    margin-bottom: 1.2rem;
 }
 
 .highlight {
     color: var(--accent-color);
+    display: inline-block;
+    border-bottom: 1px solid rgba(155, 61, 50, .5);
+    padding-bottom: .12em;
 }
 
 .hero-tagline {
-    font-size: 1.2rem;
-    max-width: 600px;
-    margin: 0 auto 2rem;
-    opacity: 0.8;
+    font-size: 1rem;
+    color: var(--muted-color);
+    max-width: 620px;
+    margin: 0 auto 2.5rem;
+    font-weight: 300;
 }
+
+.hero-btns { display: flex; justify-content: center; gap: 1rem; }
 
 .btn {
     display: inline-block;
-    padding: 0.8rem 2rem;
-    border-radius: 4px;
+    padding: .75rem 1.8rem;
+    border-radius: 2px;
     text-decoration: none;
-    font-weight: 500;
-    transition: transform 0.2s, background 0.3s;
+    font-size: .9rem;
+    letter-spacing: .12em;
+    transition: transform .25s, background .25s, color .25s;
 }
 
 .btn-primary {
     background: var(--accent-color);
-    color: #000;
-    margin-right: 1rem;
+    color: #fffaf2;
+    border: 1px solid var(--accent-color);
 }
 
 .btn-secondary {
-    border: 1px solid var(--accent-color);
-    color: var(--accent-color);
+    border: 1px solid var(--line-color);
+    color: var(--text-color);
+    background: rgba(251, 249, 244, .55);
 }
 
-.btn:hover {
-    transform: translateY(-3px);
-    filter: brightness(1.1);
-}
+.btn:hover { transform: translateY(-3px); }
+.btn-primary:hover { background: var(--accent-dark); }
+.btn-secondary:hover { border-color: var(--accent-color); color: var(--accent-color); }
 
-/* --- 通用 Section --- */
+/* 內容區 */
 .section {
-    padding: 8rem 0;
+    padding: 7rem 0;
+    position: relative;
 }
 
 .section-title {
+    font-family: var(--font-display);
     font-size: 2rem;
-    margin-bottom: 3rem;
+    font-weight: 500;
+    letter-spacing: .16em;
+    margin-bottom: 2.5rem;
     position: relative;
 }
 
 .section-title::after {
     content: '';
     display: block;
-    width: 50px;
-    height: 4px;
+    width: 42px;
+    height: 1px;
     background: var(--accent-color);
-    margin-top: 10px;
+    margin-top: 1rem;
 }
+
+.about-content {
+    max-width: 760px;
+    color: #555449;
+    font-weight: 300;
+}
+
+.about-content p + p { margin-top: 1.2rem; }
 
 .bg-light {
     background-color: var(--secondary-color);
+    border-top: 1px solid var(--line-color);
+    border-bottom: 1px solid var(--line-color);
 }
 
-/* --- Contact --- */
+.contact-text { color: var(--muted-color); }
+
 .contact-links {
     display: flex;
+    flex-wrap: wrap;
     gap: 2rem;
     margin-top: 2rem;
 }
@@ -161,26 +232,32 @@ body {
 .contact-item {
     color: var(--text-color);
     text-decoration: none;
-    border-bottom: 1px dashed var(--accent-color);
-    transition: all 0.3s;
+    padding-bottom: .25rem;
+    border-bottom: 1px solid var(--accent-color);
+    transition: color .3s;
 }
 
-.contact-item:hover {
-    color: var(--accent-color);
-}
+.contact-item:hover { color: var(--accent-color); }
 
-/* --- Footer --- */
 .footer {
     padding: 2rem 0;
     text-align: center;
-    font-size: 0.8rem;
-    opacity: 0.6;
+    font-size: .78rem;
+    color: var(--muted-color);
+    letter-spacing: .1em;
+    background: #e4ddcf;
 }
 
-/* --- 響應式設計 (Responsive) --- */
 @media (max-width: 768px) {
+    .container { padding: 0 1.35rem; }
+    .navbar { min-height: 64px; }
+    .nav-links { gap: 1.1rem; }
+    .nav-links a { font-size: .78rem; }
+    .hero { min-height: 88vh; }
     .hero-name { font-size: 2.2rem; }
-    .hero-btns { display: flex; flex-direction: column; gap: 1rem; }
-    .btn { margin-right: 0; width: 100%; }
+    .hero-tagline { font-size: .92rem; }
+    .hero-btns { flex-direction: column; align-items: center; }
+    .btn { width: min(100%, 280px); }
+    .section { padding: 5rem 0; }
     .contact-links { flex-direction: column; gap: 1rem; }
 }
